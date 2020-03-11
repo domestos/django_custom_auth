@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
   <a class="navbar-brand" href="#">CUSTOM AUTH</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
     aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,18 +26,27 @@
 
 
 
-
+    {% if user.is_authenticated %}
     <ul class="navbar-nav ml-md-auto">
       <li class="nav-item dropdown">
         <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="dropdown0" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">Profile</a>
+          aria-expanded="false">{{ user.username }}</a>
         <div class="dropdown-menu" aria-labelledby="dropdown0">
        
           <a class="dropdown-item" href="#">Settings</a>
-          <a class="dropdown-item" href="#">Log Out</a>
+          <a class="dropdown-item" href="{% url 'password_change'%}">Change password</a>
+          
+          <a class="dropdown-item" href="{% url 'logout_url' %}">Log Out</a>
         </div>
       </li>
     </ul>
+
+{% else %}
+        <form class="form-inline ml-auto">
+          <a href="{% url 'login_url' %}" class="btn btn-outline-secondary">Log in</a>
+          <a href="{% url 'signup_url' %}" class="btn btn-primary ml-2">Sign up</a>
+        </form>
+     {% endif %}
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
