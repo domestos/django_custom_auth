@@ -1,0 +1,52 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- BLOCK of HEAD LINKS -->
+  {% block head_link %}
+  <!-- Bootstrap CSS -->
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  {% endblock   %}
+
+  <!-- BLOCK of TITLE -->
+  <title>
+    {% block title %}
+    Base page
+    {% endblock %}
+  </title>
+  </hed>
+  {% block body %}
+
+<body>
+
+  <!-- NAVBAR -->
+  {% include "includes/navbar.html" %}
+  <!-- END NAVBAR -->
+
+  <!-- CONTENT -->
+  <main role="main" class="container-fluid">
+    {% block content %}{% endblock  %}
+  </main>
+  <!-- END CONTENT -->
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  {% block scripts %}
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script type="text/javascript" src="{% static  'js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static  'js/bootstrap.js' %}"></script>
+  {% endblock   %}
+
+</body>
+{% endblock  %}
+
+</html>
