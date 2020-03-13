@@ -5,23 +5,26 @@
 {% block content %}
 
 
+
+
+
 <div class="container">
-   
     <div class="row my-2">
         <div class="col-lg-8 order-lg-2">
             <ul class="nav nav-tabs">
-               
                 <li class="nav-item">
                     <a href="" data-target="#profile" data-toggle="tab" class="nav-link  {{profile_active}} ">Profile</a>
                 </li>
-               
+
+                {% if not request.user.ldap_user %}
                 <li class="nav-item">
                     <a href="" data-target="#change_password" data-toggle="tab" class="nav-link {{ ch_pass_active }}">Change password</a>
                 </li>
+                  {% endif %}
                 <li class="nav-item">
                     <a href="" data-target="#edit" data-toggle="tab" class="nav-link {{ edit_active }}">Edit</a>
                 </li>
-               
+             
             </ul>
             <div class="tab-content py-4">
                
@@ -58,6 +61,7 @@
                 </div>
                 <div class="tab-pane {{ edit_active }}" id="edit">
                     <h5 class="mb-3">Edit Profile</h5>
+                   {% if not request.user.ldap_user %}
                     <form method="post" enctype="multipart/form-data" >
                         {% csrf_token %}                       
                         {{form|crispy}}
@@ -65,6 +69,18 @@
                         <input type="hidden" name="action" value="edit_profile">
                         <button type="submit" class="btn btn-primary">Update</button>
                      </form>
+                    {% endif %}
+
+                    {% if  request.user.ldap_user %}
+                       <form method="post" enctype="multipart/form-data" >
+                        {% csrf_token %}                       
+                    
+                       {{form.image}}
+                        <!-- This hidden input must have be here. FORBIDDEN edit name and value  -->
+                        <input type="hidden" name="action" value="edit_profile">
+                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                        </form>
+                    {% endif %}
                 </div>
                
             </div>
@@ -73,16 +89,16 @@
             <img src="{% if user.image %}{{ user.image.url }}{% else %} //placehold.it/250 {%endif%}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
             {% comment %} <h6 class="mt-2">Upload a different photo</h6> {% endcomment %}
             <label class="custom-file">
-               {% comment %} <form method="post" enctype="multipart/form-data" >
-                        {% csrf_token %}                       
-                    
-                       {{form.image}}
-                        <!-- This hidden input must have be here. FORBIDDEN edit name and value  -->
-                        <input type="hidden" name="action" value="edit_profile">
-                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
-                     </form> {% endcomment %}
+           
             </label>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
 {% endblock %}

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'widget_tweaks',
     'apps.accounts',
+    'apps.settings.ldap',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -60,6 +61,12 @@ LOGOUT_REDIRECT_URL = 'login_url'
 LOGIN_REDIRECT_URL = 'accounts_url'
 LOGIN_URL = 'login_url'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# 'django_python3_ldap.auth.LDAPBackend',
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'apps.settings.ldap.util.auth.LDAPBackend',
+]
 
 
 ROOT_URLCONF = 'config.urls'

@@ -9,7 +9,8 @@
   <!-- BLOCK of HEAD LINKS -->
   {% block head_link %}
   <!-- Bootstrap CSS -->
-
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
   {% comment %} <link rel="stylesheet" href="{% static 'css/materialize.css' %}"> {% endcomment %}
   {% endblock   %}
@@ -31,9 +32,9 @@
 
   <!-- CONTENT -->
  <div class="container-fluid">  
-  {% include "includes/messages.html" %}
-    {% block content %}
-    
+    {% include "includes/messages.html" %}
+
+    {% block content %}   
     
     {% endblock  %}
   </div>
