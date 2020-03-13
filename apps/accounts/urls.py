@@ -3,7 +3,7 @@
 from django.contrib import admin
 from django.urls import path
 from django.views import View
-from .views import AccountsView
+from .views import AccountsView, ProfileView
 
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url
@@ -15,6 +15,12 @@ urlpatterns = [
 
     url(r'^signup/$', signup, name='signup_url'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout_url'),
+    path('profile/<int:pk>', ProfileView.as_view(), name='profile_url'),
+    # path('profile/change_password', change_password, name='change_password_url'),
+
+
+
+    
     url(r'^login/$', auth_views.LoginView.as_view(template_name='accounts/registration/login.html'), name='login_url'),
 
 

@@ -5,13 +5,18 @@
 
 {% block body %}
   <div class="container">
+    
     <h1 class="text-center logo my-4">
         CUSTOM AUTH
     </h1>
+    {% include "includes/messages.html" %}
     <div class="row justify-content-center">
+       
       <div class="col-lg-4 col-md-6 col-sm-8">
         <div class="card">
+          
           <div class="card-body">
+           
             <h3 class="card-title">Log in</h3>
             <form method="post" novalidate>
               {% csrf_token %}
@@ -29,6 +34,7 @@
           </small>
         </div>
       </div>
+    
     </div>
   </div>
 {% endblock %}

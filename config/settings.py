@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTH_USER_MODEL = 'accounts.User'
 
 LOGOUT_REDIRECT_URL = 'login_url'
 LOGIN_REDIRECT_URL = 'accounts_url'

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}  Home  {% endblock %}
+
+{% block content %}
+<div class="container">
+   
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+               
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link  {{profile_active}} ">Profile</a>
+                </li>
+               
+                <li class="nav-item">
+                    <a href="" data-target="#change_password" data-toggle="tab" class="nav-link {{ ch_pass_active }}">Change password</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link {{ edit_active }}">Edit</a>
+                </li>
+               
+            </ul>
+            <div class="tab-content py-4">
+               
+                <div class="tab-pane {{profile_active}}" id="profile">
+                    <h5 class="mb-3">User Profile</h5>
+                    <div class="row">
+                        
+                        
+                        <div class="col-md-12">
+                            <h6>Personal info</h6>
+                            <p> <b>Username: </b>{{user.username}}</p>
+                            <p> <b>Email: </b>{{user.email}}</p>
+                            <p> <b>First Name: </b>{{user.first_name}}</p>
+                            <p> <b>Last Name: </b>{{user.last_name}}</p>
+                            <p> <b>Department: </b>{{user.department}}</p>
+                            
+                            <h6>Important dates</h6>
+                            <p> <b>Created: </b>{{user.when_created}}</p>
+                            <p> <b>Last Login: </b>{{user.last_login}}</p>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </div>
+              
+                <div class="tab-pane {{ ch_pass_active }}" id="change_password">
+                    <h5 class="mb-3">Change password</h5>
+                    <form name='edit_profile' method="post" novalidate>
+                        {% csrf_token %}                       
+                        {{form_pass|crispy}}
+                        <!-- This hidden input must have be here  -->
+                        <input type="hidden" name="action" value="change_password">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                      </form>
+                </div>
+                <div class="tab-pane {{ edit_active }}" id="edit">
+                    <h5 class="mb-3">Edit Profile</h5>
+                    <form method="post" novalidate>
+                        {% csrf_token %}                       
+                        {{form|crispy}}
+                        <!-- This hidden input must have be here. FORBIDDEN edit name and value  -->
+                        <input type="hidden" name="action" value="edit_profile">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                      </form>
+                </div>
+               
+            </div>
+        </div>
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <h6 class="mt-2">Upload a different photo</h6>
+            <label class="custom-file">
+                <input type="file" id="file" class="custom-file-input">
+                <span class="custom-file-control">Choose file</span>
+            </label>
+        </div>
+    </div>
+</div>
+{% endblock %}
