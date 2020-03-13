@@ -28,14 +28,20 @@
 
     {% if user.is_authenticated %}
     <ul class="navbar-nav ml-md-auto">
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Settings</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">LDAP</a>
+          <a class="dropdown-item" href="#">QR-Code</a>
+        </div>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="dropdown0" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">{{ user.username }}</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown0">
-       
-          <a class="dropdown-item" href="{% url 'profile_url' user.id %}">Profile</a>
-          <a class="dropdown-item" href="{% url 'password_change'%}">Change password</a>
-          
+          aria-expanded="false">{{ request.user.username }}</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown0">       
+          <a class="dropdown-item" href="{% url 'profile_url' request.user.id %}">Profile</a>
+          <a class="dropdown-item" href="{% url 'password_change'%}">Change password</a>          
           <a class="dropdown-item" href="{% url 'logout_url' %}">Log Out</a>
         </div>
       </li>

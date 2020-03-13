@@ -7,6 +7,9 @@ from django.contrib.auth.models import AbstractUser
 
 
 class NullableEmailField(models.EmailField):
+    """ 
+    This Class allows save unique email and Null to DataBase
+    """
     description = "EmailField that stores NULL but returns ''"
     __metaclass__ = models.Field
     def to_python(self, value):
@@ -17,13 +20,13 @@ class NullableEmailField(models.EmailField):
         return value or None
 
 class User(AbstractUser):
-    # overwrite email ste the (unique=True --- reset password) , (blank=True --- for ldap users without email)
-    # email = models.EmailField(verbose_name='email address',  max_length=255, unique=True , blank=True, null=True,)
     email = NullableEmailField(('e-mail address'),  blank=True, null=True, default=None, unique=True)
     when_created = models.DateTimeField(default=timezone.now , blank=True)
     when_changed = models.DateTimeField( default=timezone.now, blank=True)
     ldap_user = models.BooleanField(default=False)
     department = models.CharField(max_length=150, blank=True)
+    # mobile_phone = 
+    image = models.ImageField(upload_to='profile\photo', blank=True, default='asset\placeholder-profile.jpg')
     # history = HistoricalRecords(related_name='history_profile')
 
     def __str__(self):
