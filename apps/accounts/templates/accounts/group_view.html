@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}  GROUPS  {% endblock %}
+
+{% block content %}
+
+<div class="container">
+ 
+    <a href="{% url 'group_create_url' %}"><span type="" class="btn btn-info">ADD GROUP +</span></a>
+    
+    <table class="table">
+  <thead class="">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+       <th scope="col">Permission</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for group in object_list %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>
+            <a href="{% url 'group_change_url' group.id %}">{{ group.name }}</a>
+      </td>
+       <td>
+           {% for permission  in     group.permissions.all %} || {{permission.name}} {% endfor %} 
+      </td>
+     
+    </tr>
+    {% empty %}
+    No groups yet
+    {% endfor %} 
+   
+  </tbody>
+</table>
+
+    
+{% comment %}     
+    
+    
+    
+    {% for group in object_list %}
+    
+    <a href="{% url 'group_change_url' group.id %}">
+     <li>{{ group.name }}  </li></a>
+     {% for permission  in     group.permissions.all %} <p> {{permission.name}} </p>{% endfor %} 
+
+{% endfor %} {% endcomment %}
+</div>
+
+{% endblock %}

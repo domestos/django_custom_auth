@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}  DELETE GROUP  {% endblock %}
+
+{% block content %}
+<div class="container">
+
+<a href="{{request.META.HTTP_REFERER|escape}}"><< Back</a>
+   
+
+<h2> Are you sure?</h2><p>
+Are you sure you want to delete the group "<a href="{% url 'group_change_url' object.pk %}" > {{ object }}</a>"?
+</p>
+
+<h5> Permissions: </h5>
+<ul>
+{% for permission in object.permissions.all %}
+
+<li> {{permission }}</li>
+{% endfor %}
+
+</ul>
+
+<form  method="post">{% csrf_token %}
+
+
+
+    <div class="row">
+    
+    <input type="submit"  class="btn btn-danger"  value="Yes, I’m sure">
+
+
+   <a href="{{request.META.HTTP_REFERER|escape}}" class="btn btn-info" >No, take me back</a>
+    </div>
+
+  
+</form> 
+
+
+{% endblock %}

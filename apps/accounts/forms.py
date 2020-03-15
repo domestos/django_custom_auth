@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from apps.accounts.models import User
-
+from django.contrib.auth.models import Group, Permission
+from django.contrib.admin.widgets import FilteredSelectMultiple, AutocompleteSelectMultiple
 class SignUpForm(UserCreationForm):
     class Meta:
         model = User
@@ -12,10 +13,17 @@ class SignUpForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('image','email','first_name','last_name','department')
+        fields = ('image','email','first_name','last_name','department','groups','user_permissions')
 
     
-    
+class GqoupForm(forms.ModelForm):  
+      
+      permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(), widget=FilteredSelectMultiple("verbose name", is_stacked=True))
+      class Meta:
+        model = Group
+        fields = ('name','permissions')
+
+        # fields = ('name','content_type','codename','objects')
     
     
     

@@ -16,6 +16,10 @@ urlpatterns = [
     url(r'^signup/$', signup, name='signup_url'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout_url'),
     path('profile/<int:pk>', ProfileView.as_view(), name='profile_url'),
+    path('group/list', GroupListView.as_view(), name='group_url'),
+    path('group/create/', GroupCreateView.as_view(), name='group_create_url'),
+    path('group/<int:pk>/change/', GroupUpdateView.as_view(), name='group_change_url'),
+    path('group/<int:pk>/delete/', GroupDeleteView.as_view(), name='group_delete_url'),
     # path('profile/change_password', change_password, name='change_password_url'),
 
 

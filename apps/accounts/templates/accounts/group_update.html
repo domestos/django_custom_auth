@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} CHANGE GROUP  {% endblock %}
+
+{% block content %}
+<div class="container">
+
+{% comment %} <a href="{{request.META.HTTP_REFERER|escape}}"> {% endcomment %}
+  <a href="{% url 'group_url' %}"><span type="" class="btn btn-info"><i class="fa fa-chevron-circle-left" aria-hidden="true"> <span> back</span> </i></a>
+   
+</a>
+    <form method="post">{% csrf_token %}
+    {{ form|crispy }}
+
+    
+
+<div class="submit-row">
+  
+ <input type="submit" class="btn btn-success" value="Save">
+ 
+
+<a href="{% url 'group_delete_url' object.pk %}"><span type="" class="btn btn-danger">DELETE GROUP</span></a>
+
+</div>
+   
+</form>
+
+{% endblock %}
