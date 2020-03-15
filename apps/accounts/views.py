@@ -90,7 +90,8 @@ class ProfileView(LoginRequiredMixin, PermissionRequiredMixin, View):
 
 
 
-class GroupListView(ListView,FormView):
+class GroupListView(PermissionRequiredMixin, ListView,FormView):
+    permission_required=  ('auth.view_group') 
     template_name = 'accounts/group_view.html'
     model = Group
     form_class = GqoupForm
@@ -100,14 +101,16 @@ class GroupListView(ListView,FormView):
     #     context['now'] = timezone.now()
     #     return context
 
-class GroupUpdateView(UpdateView):
+class GroupUpdateView(PermissionRequiredMixin, UpdateView):
+    permission_required=  ( 'auth.change_group') 
     model = Group
     template_name = 'accounts/group_update.html'
     fields = ['name','permissions']
     success_url = reverse_lazy('group_url')
 
 
-class GroupCreateView(CreateView):
+class GroupCreateView(PermissionRequiredMixin , CreateView):
+    permission_required=  ( 'auth.add_group') 
     model = Group
     template_name = 'accounts/group_create.html'
     fields = ['name','permissions']
@@ -115,7 +118,8 @@ class GroupCreateView(CreateView):
 
 
 
-class GroupDeleteView(DeleteView):
+class GroupDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required=  ('auth.delete_group') 
     model = Group
     template_name = 'accounts/group_delete.html'
     success_url = reverse_lazy('group_url')

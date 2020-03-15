@@ -25,4 +25,15 @@
    
 </form>
 
+
+
+
+<h5> Users: </h5>
+<ul>
+{% for user in object.user.all %}
+
+<li> {{user }}</li>
+{% endfor %}
+
+</ul>
 {% endblock %}
