@@ -5,13 +5,20 @@ from django.contrib.auth.forms import PasswordChangeForm
 from .forms import SignUpForm, ProfileForm
 from .models import User
 from django.contrib import messages
+from .decorators import unaunthenticated_user
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+
 # Create your views here.
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import permission_required
 
 
-class AccountsView(View):
+# @login_required
+class AccountsView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, 'accounts/index.html')
 
+@unaunthenticated_user
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -23,7 +30,16 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'accounts/registration/signup.html', {'form': form})
 
-class ProfileView(View):
+class ProfileView(LoginRequiredMixin,PermissionRequiredMixin, View):
+
+    # login_url = None  
+    permission_required=  ('accounts.view_user', 'accounts.change_user') 
+    permission_denied_message = 'accounts.view_user'
+    # raise_exception = False
+    # redirect_field_name = REDIRECT_FIELD_NAME
+
+
+    # @method_decorator(permission_required('accounts.view_user', 'accounts.change_user'))
     def get(self, request, pk):
         user = get_object_or_404(User, pk=pk)
         if user != request.user:
@@ -33,7 +49,8 @@ class ProfileView(View):
         context = {'user': user, 'form': form,
                    'form_pass': form_pass, 'profile_active': 'active'}
         return render(request, 'accounts/profile.html', context)
-
+    
+    # @method_decorator(permission_required('accounts.change_user', login_url="accounts_url", raise_exception=True))
     def post(self, request, pk):
         action = request.POST.get('action')
         user = get_object_or_404(User, pk=pk)
@@ -65,17 +82,3 @@ class ProfileView(View):
                 messages.error(request,  "Error", extra_tags='alert-danger')
                 context =  {'form': form, 'form_pass': form_pass, 'ch_pass_active': 'active'}
                 return render(request, 'accounts/profile.html', context)
-
-# def change_password(request):
-#     if request.method == "POST":
-#         # user = get_object_or_404(User, pk=pk )
-#         form_pass = PasswordChangeForm(data=request.POST, user=request.user)
-#         print(request.user)
-#         if form_pass.is_valid():
-#             form_pass.save()
-#             return redirect('account_url')
-#         else:
-#             form_pass = PasswordChangeForm(request.POST)
-#             # user = get_object_or_404(User, pk=pk )
-#             # form = ProfileForm(instance=user)
-#             return redirect('accounts_url')

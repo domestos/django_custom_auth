@@ -40,3 +40,9 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse("user_detail_url", kwargs={'pk':self.pk} )
+    
+    def get_profile_url(self):
+        return reverse("profile_url", kwargs={'pk':self.pk} )
+
+    class Meta:
+        permissions = [('can_eat_pizzas', 'Can eat pizzas')]
