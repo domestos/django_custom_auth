@@ -22,7 +22,7 @@
     <tr>
       <th scope="row">{{ forloop.counter }}</th>
       <td>
-            <a href="{% url 'group_change_url' group.id %}">{{ group.name }}</a>
+            <a class="text-info" href="{% url 'group_change_url' group.id %}">{{ group.name }}</a>
       </td>
        <td>
            {% for permission  in     group.permissions.all %} || {{permission.name}} {% endfor %} 

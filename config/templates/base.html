@@ -9,10 +9,11 @@
   <!-- BLOCK of HEAD LINKS -->
   {% block head_link %}
   <!-- Bootstrap CSS -->
-  
+  {{ form.media.css }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
   {% comment %} <link rel="stylesheet" href="{% static 'css/materialize.css' %}"> {% endcomment %}
+  
   {% endblock   %}
 
   <!-- BLOCK of TITLE -->
@@ -28,6 +29,7 @@
 
   <!-- NAVBAR -->
   {% include "includes/navbar.html" %}
+  
   <!-- END NAVBAR -->
 
   <!-- CONTENT -->
@@ -51,8 +53,8 @@
   <script type="text/javascript" src="{% static  'js/jquery-3.4.1.min.js' %}"></script>
   <script type="text/javascript" src="{% static  'js/bootstrap.js' %}"></script>
    {% comment %} <script type="text/javascript" src="{% static  'js/materialize.js' %}"></script> {% endcomment %}
-
-  
+   <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script> -->
+   {{ form.media.js }}
   {% endblock   %}
 
 </body>

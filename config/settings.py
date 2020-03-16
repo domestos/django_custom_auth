@@ -37,13 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_select2',
     'crispy_forms',
     'widget_tweaks',
+    
     'apps.accounts',
     'apps.settings.ldap',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+SELECT2_CSS =  os.path.join(BASE_DIR, 'config/static_dev/css/select2.css')   
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

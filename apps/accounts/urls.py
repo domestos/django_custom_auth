@@ -2,6 +2,7 @@
 
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
 from django.views import View
 from .views import AccountsView, ProfileView
 
@@ -21,7 +22,7 @@ urlpatterns = [
     path('group/<int:pk>/change/', GroupUpdateView.as_view(), name='group_change_url'),
     path('group/<int:pk>/delete/', GroupDeleteView.as_view(), name='group_delete_url'),
     # path('profile/change_password', change_password, name='change_password_url'),
-
+    url(r'^select2/', include('django_select2.urls')),
 
 
     

@@ -19,13 +19,14 @@ from django.urls import path
 
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.conf.urls import url
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('apps.accounts.urls')),
     path('setting/ldap/', include('apps.settings.ldap.urls')), 
+    url(r'^select2/', include('django_select2.urls')),
 ]
 
 

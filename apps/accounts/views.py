@@ -105,21 +105,22 @@ class GroupUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required=  ( 'auth.change_group') 
     model = Group
     template_name = 'accounts/group_update.html'
-    fields = ['name','permissions']
+    form_class = GqoupForm
     success_url = reverse_lazy('group_url')
 
 
-class GroupCreateView(PermissionRequiredMixin , CreateView):
-    permission_required=  ( 'auth.add_group') 
+class GroupCreateView(PermissionRequiredMixin , CreateView,FormView):
+    permission_required=  ( 'auth.add_group','auth.view_group') 
     model = Group
     template_name = 'accounts/group_create.html'
-    fields = ['name','permissions']
+    # fields = ['name','permissions']
     success_url = reverse_lazy('group_url')
+    form_class = GqoupForm
 
 
 
 class GroupDeleteView(PermissionRequiredMixin, DeleteView):
-    permission_required=  ('auth.delete_group') 
+    permission_required=  ('auth.delete_group','auth.view_group') 
     model = Group
     template_name = 'accounts/group_delete.html'
     success_url = reverse_lazy('group_url')
