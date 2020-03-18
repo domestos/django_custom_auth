@@ -23,15 +23,24 @@ class GqoupForm(forms.ModelForm):
         model = Group
         fields = ('name','permissions')
         widgets = {
-            'permissions': Select2MultipleWidget,
-            # "style":  '{background-color:#17a2b8}'
-            'class': "text-info",
-            # 'multiple ':"",
-            # 'id':'inputInfo',
-            # 'style':"border-color: #3c8dbc; box-shadow: none;"
+            # 'permissions':  forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input   class=js-example-basic-multiple', "type": "checkbox"})
+        #    'permissions':  Select2MultipleWidget(attrs={'class':'js-example-basic-multiple'})
+             'permissions': Select2MultipleWidget,
             
+            #   'permissions':   "class=js-example-basic-multiple" name="states[]" multiple="multiple"    
         }
     
+
+class UserGqoupsForm(forms.ModelForm):  
+    # permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(), widget=Select2MultipleWidget)
+    class Meta:
+        model = User
+        fields = ('groups',)
+        widgets = {
+            'permissions': Select2MultipleWidget,
+           
+            
+        }
     
     
     

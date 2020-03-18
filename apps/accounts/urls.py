@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from django.views import View
-from .views import AccountsView, ProfileView
+from .views import AccountsView, ProfileView, UserTable
 
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url
@@ -16,13 +16,14 @@ urlpatterns = [
 
     url(r'^signup/$', signup, name='signup_url'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout_url'),
+    path('users', UserTable.as_view(), name='users_url'),
     path('profile/<int:pk>', ProfileView.as_view(), name='profile_url'),
-    path('group/list', GroupListView.as_view(), name='group_url'),
-    path('group/create/', GroupCreateView.as_view(), name='group_create_url'),
-    path('group/<int:pk>/change/', GroupUpdateView.as_view(), name='group_change_url'),
-    path('group/<int:pk>/delete/', GroupDeleteView.as_view(), name='group_delete_url'),
+    path('group/list', GroupList.as_view(), name='group_url'),
+    path('group/create/', GroupCreate.as_view(), name='group_create_url'),
+    path('group/<int:pk>/change/', GroupUpdate.as_view(), name='group_change_url'),
+    path('group/<int:pk>/delete/', GroupDelete.as_view(), name='group_delete_url'),
     # path('profile/change_password', change_password, name='change_password_url'),
-    url(r'^select2/', include('django_select2.urls')),
+    # url(r'^select2/', include('django_select2.urls')),
 
 
     

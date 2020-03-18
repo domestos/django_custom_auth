@@ -19,9 +19,9 @@
 						{% csrf_token %}
 						{{forms |crispy}}
 						<button type="submit" name="seve_ldap_config_btn" class="btn btn-success">save</button>
-						<a href="{% url 'ldap_test_connect_url' %}"><span type="" class="btn btn-info"
+						<a href="{% url 'ldap_test_connect_url' %}"><span class="btn btn-info"
 								name="test_connect_btn" value="Test Connect">Test Connect</span></a>
-						<a href="{% url 'ldap_setting_sync_user_url' %}"><span type="" class="btn btn-info"
+						<a href="{% url 'ldap_setting_sync_user_url' %}"><span class="btn btn-info"
 								name="test_connect_btn" value="Test Connect">Sync User</span></a>
 								
 					</form>

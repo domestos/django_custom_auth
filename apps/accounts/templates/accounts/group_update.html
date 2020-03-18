@@ -1,41 +1,32 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% block title %} CHANGE GROUP  {% endblock %}
+{% block title %} CHANGE GROUP {% endblock %}
 
 {% block content %}
 <div class="container">
+    <a href="{% url 'group_url' %}">
+      <span  class="btn btn-info">
+        <i class="fa fa-chevron-circle-left" aria-hidden="true"> 
+          <span> back</span> 
+        </i>
+      </span>
+    </a> 
 
-  {{ form.media.js }}
-{% comment %} <a href="{{request.META.HTTP_REFERER|escape}}"> {% endcomment %}
-  <a href="{% url 'group_url' %}"><span type="" class="btn btn-info"><i class="fa fa-chevron-circle-left" aria-hidden="true"> <span> back</span> </i></a>
-   
-</a>
-    <form method="post">{% csrf_token %}
-      {{ form.media.css }}
+  
+  <form method="post">
+    {% csrf_token %}
     {{ form|crispy }}
 
-  
+    <div class="submit-row">
 
-<div class="submit-row">
-  
- <input type="submit" class="btn btn-success" value="Save">
- 
+      <input type="submit" class="btn btn-success" value="Save">    
 
-<a href="{% url 'group_delete_url' object.pk %}"><span type="" class="btn btn-danger">DELETE GROUP</span></a>
+      <a href="{% url 'group_delete_url' object.pk %}"><span class="btn btn-danger">DELETE GROUP</span></a>
+
+    </div>
+  </form>
 
 </div>
-   
-</form>
 
 
-
-
-<h5> Users: </h5>
-
-<ul>
-{% for user in object.user.all %}
-<li> {{user }}</li>
-{% endfor %}
-
-</ul>
 {% endblock %}

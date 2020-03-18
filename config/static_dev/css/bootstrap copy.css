@@ -10222,3 +10222,21 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+
+.form-control{
+  border: 1px solid #cccccc!important;
+}
+.select2-container .select2-selection--single {
+  height: 48px !important;
+  padding: 10px;
+  border-radius: 0px;
+  border: 1px solid #cccccc;
+}
+.select2-container .select2-selection--multiple {
+  height: 48px !important;
+  padding: 5px;
+  border-radius: 0px;
+  border: 1px solid #cccccc;
+}
